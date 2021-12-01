@@ -1,0 +1,15 @@
+.text-to-right {
+        color: white;
+}
+
+.outer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #C4C4C4;
+    
+}
+
+.inside {
+    display: flex;
+    justify-content: center;
+}
