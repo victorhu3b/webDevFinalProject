@@ -4,6 +4,11 @@ const { check, validationResult} = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+var request = require('request');
+//import $ from 'jquery'
+
+//Jquery 
+
 
 const User = require("../model/User");
 
@@ -26,7 +31,8 @@ router.post(
         const {
             username,
             email,
-            password
+            password,
+            address
         } = req.body;
         try {
             let user = await User.findOne({
@@ -41,7 +47,8 @@ router.post(
             user = new User({
                 username,
                 email,
-                password
+                password,
+                address
             });
 
             const salt = await bcrypt.genSalt(10);
@@ -138,5 +145,26 @@ router.post(
       res.send({ message: "Error in Fetching user" });
     }
   });
+
+  /*
+  Returns JSON from the Google Civics API. Requires users input the token returned by the signup and login routes. 
+  That token must be passed into the URI as a query string of the form "user_key=< STRING >"
+  Example: /user/search/?user_key=USER_KEY_HERE
+  If error, it'll return JSON with a message attribute containing the appropriate error message
+  */
+  router.get("/search", async (req, res) => {
+    try {
+    const token = req.query.user_key;
+    const decoded = jwt.verify(token, "randomString");
+    req.user = decoded.user;
+    const user = await User.findById(req.user.id);
+    var user_address = user.address
+    request({
+      uri: encodeURI(`https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAW_-anPcsM0WWDtZ3sm26tFSfjOKGl-Rg&address=${user_address}`)
+    }).pipe(res);
+  } catch (e) {
+    res.send({message: "Error in searching for representatives"})
+  }
+  })
 
 module.exports = router;

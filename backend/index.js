@@ -4,6 +4,7 @@ const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user"); 
 const auth = require("./middleware/auth");
 
+
 // Initiate Mongo Server
 InitiateMongoServer();
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/user", user);
-//app.use("/shop", shop);
+
 
 app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);
