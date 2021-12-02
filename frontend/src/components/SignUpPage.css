@@ -1,0 +1,55 @@
+.SignUpPage {
+    margin-top: 70px;
+    display: flex; 
+    justify-content: center;
+}
+
+.SignUpBox {
+
+    text-align: center;
+    width: 300px;
+
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 5px;
+    
+    padding-bottom: 20px;
+}
+
+.SignUpHeader {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.TextInput {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background: #C4C4C4;
+    border-radius: 5px;
+    border: None;
+    padding: 5px;
+    width: 220px;
+    font-size: 15px;
+}
+
+.Submit {
+    margin-top: 70px;
+    margin-bottom: 5px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    font-size: 15px;
+    color: #FFFFFF;
+
+    background-color: #000000;
+    border-radius: 5px;
+}
+.Submit:hover {
+    color: #CCCCCC;
+}
