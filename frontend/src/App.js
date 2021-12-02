@@ -1,19 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "./Components/NavBar"
-import { ChakraProvider } from '@chakra-ui/react'
-import AboutTxt from './Components/AboutTxt';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
+import Navbar from './components/Navbar';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
-    <ChakraProvider>
-      <div className="App">
-      <NavBar/>
+    <div className="App">
+      <Navbar/>
     </div>
-    <AboutTxt />
   
-  </ChakraProvider>
   );
 }
 
