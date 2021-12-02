@@ -1,0 +1,22 @@
+.Dashboard {
+    display: flex;
+    justify-content: left;
+}
+.Sidebar {
+    height: 500px;
+    background-color: rgba(91, 91, 91, 0.5);
+    width: 15%;
+    text-align: left;
+
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.SidebarLink {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    color: white;
+
+}

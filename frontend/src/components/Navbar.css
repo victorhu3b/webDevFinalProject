@@ -1,0 +1,16 @@
+.Navbar {
+    background-color: #C4C4C4;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.NavLink {
+    color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+.NavLink:hover {
+    color: #777777;
+}
