@@ -4,13 +4,17 @@ import {
     BrowserRouter,
     Switch,
     Route,
+    Redirect,
     Link
   } from "react-router-dom";
+  import axios from "axios";
+  import UserProfile from "./UserProfile";
 
 function LoginPage() {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [redirect, setRedirect] = useState(false);
 
     const handleChangeEmail = useCallback(
         (event) => {
@@ -23,6 +27,19 @@ function LoginPage() {
         }, [],
     );
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post("http://localhost:4000/user/login", {email: email, password: password})
+            .then( res => {
+                console.log(res);
+                UserProfile.setKey(res.data.token);
+                setRedirect(true);
+            });
+    }
+
+    if(redirect) return( <Redirect to="/dashboard" />)
+
     return(
         <div className="LoginPage">
 
@@ -33,7 +50,7 @@ function LoginPage() {
 
             <div className="LoginBox">
                 <h2 className ="LoginHeader">Login</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>
                         Email:
                         <br/>

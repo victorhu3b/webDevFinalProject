@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import UserProfile from "./UserProfile";
 
 function Dashboard() {
 
@@ -19,7 +20,7 @@ function Dashboard() {
         <div className="Dashboard">
             <div className="Sidebar">
                 <a className="SidebarLink">Test</a>
-                <a className="SidebarLink">Test</a>
+                <a className="SidebarLink">{UserProfile.getKey()}</a>
                 <a className="SidebarLink">{rep}</a>
 
             </div>
