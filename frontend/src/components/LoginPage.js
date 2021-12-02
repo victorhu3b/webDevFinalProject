@@ -49,7 +49,7 @@ function LoginPage() {
                     <input className="Submit" type="submit" value="Login" />
                 </form>
                 <div className = "CreateAccount">
-                <Link to="signup">Or Create An Account</Link>
+                <Link style = {{textDecoration: 'none'}} to="signup">Or Create An Account</Link>
                 </div>
             </div>
         </div>

@@ -5,17 +5,18 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import LoginPage from "./LoginPage";
+import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
+import Dashboard from "./Dashboard";
 
 function Navbar() {
     return (
         <BrowserRouter>
             <nav>
                 <div className="Navbar">
-                    <Link to="/about" className = "NavLink">About</Link>
-                    <Link to="/dashboard" className = "NavLink">Dashboard</Link>
-                    <Link to="/profile" className = "NavLink">Profile</Link>
+                    <Link style = {{textDecoration: 'none'}} to="/about" className = "NavLink">About</Link>
+                    <Link style = {{textDecoration: 'none'}} to="/dashboard" className = "NavLink">Dashboard</Link>
+                    <Link style = {{textDecoration: 'none'}} to="/profile" className = "NavLink">Profile</Link>
                 </div>
             </nav>
             <Switch>
@@ -23,13 +24,16 @@ function Navbar() {
                     <h1>abc</h1>
                 </Route>
                 <Route path="/dashboard">
-                    <h1>abc</h1>
+                    <Dashboard/>
                 </Route>
                 <Route path="/profile">
                   <LoginPage/>
                 </Route>
                 <Route path="/signup">
                   <SignUpPage/>
+                </Route>
+                <Route path="/">
+                  <LoginPage/>
                 </Route>
             </Switch>
         </BrowserRouter>
