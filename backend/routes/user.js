@@ -136,9 +136,12 @@ router.post(
     }
   );
 
-  router.get("/me", auth, async (req, res) => {
+  router.get("/me", async (req, res) => {
     try {
       // request.user is getting fetched from Middleware after token authentication
+    const token = req.query.user_key;
+    const decoded = jwt.verify(token, "randomString");
+    req.user = decoded.user;
       const user = await User.findById(req.user.id);
       res.json(user);
     } catch (e) {
@@ -158,7 +161,8 @@ router.post(
     const decoded = jwt.verify(token, "randomString");
     req.user = decoded.user;
     const user = await User.findById(req.user.id);
-    var user_address = user.address
+    var user_address = user.address;
+    console.log(user_address);
     request({
       uri: encodeURI(`https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAW_-anPcsM0WWDtZ3sm26tFSfjOKGl-Rg&address=${user_address}`)
     }).pipe(res);

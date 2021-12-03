@@ -25,10 +25,11 @@ function Navbar() {
             <nav>
                 <div className="Navbar">
                     <Link style = {{textDecoration: 'none'}} to="/about" className = "NavLink">About</Link>
-                    <Link style = {{textDecoration: 'none'}} to="/dashboard" className = "NavLink">Dashboard</Link>
 
+                        {loggedIn ? <Link style = {{textDecoration: 'none'}} to="/dashboard" className = "NavLink">Dashboard</Link> : null}
                     {loggedIn ?
-                        (<Link style = {{textDecoration: 'none'}} to="/profile" className = "NavLink">Profile</Link>)
+                        
+                        <Link style = {{textDecoration: 'none'}} to="/profile" className = "NavLink">Profile</Link>
                     :
                         (<Link style = {{textDecoration: 'none'}} to="/login" className = "NavLink">Login</Link>)
                     }

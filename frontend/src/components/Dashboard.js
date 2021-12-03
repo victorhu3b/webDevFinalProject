@@ -2,29 +2,112 @@ import "./Dashboard.css";
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import UserProfile from "./UserProfile";
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Redirect,
+    Link
+  } from "react-router-dom";
 
 function Dashboard() {
 
-    const [rep, setRep] = useState("Loading");
+    const [stateCutoff, setStateCutoff] = useState(0);
+    const [muniCutoff, setMuniCutoff] = useState(0);
+    const [politicians, setPoliticians] = useState([{name: "", title: "", phone: ""}]);
+    const [loaded, setLoaded] = useState(false);
+
 
     useEffect( () => {
-        axios.get('https://qxz9rxsm71.execute-api.us-east-2.amazonaws.com/address/226%20West%20End%20Ave%20Green%20Brook%20NJ')
+        axios.get('http://localhost:4000/user/search', {params: {user_key: UserProfile.getKey()} })
             .then( res => {
-                console.log(res)
-                const representative = res.representative;
-                setRep(representative);
+                console.log(res);
+
+                var offices = res.data.offices;
+                offices.splice(3, 0, offices[2]);
+                var officials = res.data.officials;
+
+                var idx = offices.findIndex(office => office.levels[0] === "administrativeArea1");
+                setStateCutoff(idx);
+
+                idx = (offices.findIndex(office => office.levels[0] === "administrativeArea2"));
+                setMuniCutoff(idx);
+
+                // zip the 2 arrays together
+                var p = offices.map( (office, i) => {
+                    return {name: officials[i].name, title: office.name, phone: officials[i].phones[0]};
+                });
+
+                setPoliticians(p);
+
+                setLoaded(true);
+            
             })
     }, []);
 
     return(
         <div className="Dashboard">
             <div className="Sidebar">
-                <a className="SidebarLink">Test</a>
-                <a className="SidebarLink">{UserProfile.getKey()}</a>
-                <a className="SidebarLink">{rep}</a>
+                <Link to="/dashboard" className="SidebarLink">Home</Link>
+                <Link to="/dashboard/federal" className="SidebarLink">Federal</Link>
+                <Link to="/dashboard/state" className="SidebarLink">State</Link>
+                <Link to="/dashboard/municipal" className="SidebarLink">Municipal</Link>
 
             </div>
             <div className="Dash">
+
+                <Switch>
+                    <Route path="/dashboard/federal">
+                        {loaded ?
+                            <div className = 'cards'>
+                            {politicians.slice(0, 4).map(p => (
+
+                                <div className = 'card'>
+                                    <h2>{p.name}</h2>
+                                    <h4>{p.title}</h4>
+                                    <p>{p.phone}</p>
+                                </div>
+                            ))}
+                            </div>
+                            : null
+                        }
+                    </Route>
+                    <Route path="/dashboard/state">
+                        {loaded ?
+                            <div className = 'cards'>
+                            {politicians.slice(stateCutoff, muniCutoff).map(p => (
+
+                                <div className = 'card'>
+                                    <h2>{p.name}</h2>
+                                    <h4>{p.title}</h4>
+                                    <p>{p.phone}</p>
+                                </div>
+                            ))}
+                            </div>
+                            : null
+                        }
+                    </Route>
+
+                    <Route path="/dashboard/municipal">
+                        {loaded ?
+                            <div className = 'cards'>
+                            {politicians.slice(muniCutoff).map(p => (
+
+                                <div className = 'card'>
+                                    <h2>{p.name}</h2>
+                                    <h4>{p.title}</h4>
+                                    <p>{p.phone}</p>
+                                </div>
+                            ))}
+                            </div>
+                            : null
+                        }
+                    </Route>
+                    <Route path="/dashboard">
+                        <h1 className = "DashboardGreeting">Welcome Back.</h1>
+                    </Route>
+
+                </Switch>
 
             </div>
         </div>

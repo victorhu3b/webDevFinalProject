@@ -15,6 +15,7 @@ function SignUpPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
+    const [address, setAddress] = useState("");
     const [redirect, setRedirect] = useState(false);
 
     const handleChangeEmail = useCallback(
@@ -32,11 +33,16 @@ function SignUpPage() {
             setPassword(event.target.value)
         }, [],
     );
+    const handleChangeAddress = useCallback(
+        (event) => {
+            setAddress(event.target.value)
+        }, [],
+    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:4000/user/signup", {username: username, email: email, password: password})
+        axios.post("http://localhost:4000/user/signup", {username: username, address: address, email: email, password: password})
             .then( res => {
                 console.log(res);
                 UserProfile.setKey(res.data.token);
@@ -62,6 +68,11 @@ function SignUpPage() {
                         Email:
                         <br/>
                         <input className="TextInput" type="text" value={email} onChange ={handleChangeEmail}></input>
+                    </label>
+                    <label>
+                        Address:
+                        <br/>
+                        <input className="TextInput" type="text" value={address} onChange ={handleChangeAddress}></input>
                     </label>
                     <br/>
                     <label>

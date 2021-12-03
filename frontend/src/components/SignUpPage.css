@@ -1,5 +1,5 @@
 .SignUpPage {
-    margin-top: 70px;
+    margin-top: 30px;
     display: flex; 
     justify-content: center;
 }
@@ -36,7 +36,7 @@
 }
 
 .Submit {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 5px;
 
     padding-top: 10px;
