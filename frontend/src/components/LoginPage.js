@@ -45,7 +45,7 @@ function LoginPage() {
 
             <div className = "TitleBox">
                 <h1>Political Dashboard</h1>
-                <h3> For something something something.</h3>
+                <h3> For People who like Politics.</h3>
             </div>
 
             <div className="LoginBox">

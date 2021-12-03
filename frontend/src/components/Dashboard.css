@@ -46,3 +46,20 @@
     margin-bottom: 30px;
     width: 250px;
 }
+
+.ElectionHeader {
+    margin-top: 100px;
+    margin-left: 100px;
+    font-size: 50px;
+    color: #777777;
+}
+
+.ElectionCards {
+
+    text-align: center;
+
+    margin-top: 20px;
+    margin-left: 100px;
+    display:flex;
+    flex-wrap: wrap;
+}
